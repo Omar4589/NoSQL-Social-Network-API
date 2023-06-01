@@ -17,7 +17,9 @@ const reactionSchema = new Schema({
   createdAt: {
     type: Date,
     default: dayjs(),
-    get: (somedate) => dayjs(somedate).format('MM/DD/YYYY')
+    get: (somedate) => {
+      return dayjs(somedate).format("MM/DD/YYYY");
+    },
   }
 });
 
