@@ -4,6 +4,7 @@
   "description": "An API for a social media platform using MongoDB and Mongoose as the ODM. Customize it and adapt it to your social media platform.",
   "main": "index.js",
   "scripts": {
+    "seed":"node ./utils/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

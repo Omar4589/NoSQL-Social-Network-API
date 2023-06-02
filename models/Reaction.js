@@ -1,18 +1,19 @@
-const { Schema, Types } = require('mongoose');
+const dayjs = require("dayjs");
+const { Schema, Types } = require("mongoose");
 
 const reactionSchema = new Schema({
   reactionId: {
     type: Schema.Types.ObjectId,
-    default: () => new mongoose.Types.ObjectId()
+    default: () => new Types.ObjectId(),
   },
   reactionBody: {
     type: String,
     required: true,
-    maxlength: 280
+    maxlength: 280,
   },
   username: {
     type: String,
-    required: true
+    required: true,
   },
   createdAt: {
     type: Date,
@@ -20,7 +21,7 @@ const reactionSchema = new Schema({
     get: (somedate) => {
       return dayjs(somedate).format("MM/DD/YYYY");
     },
-  }
+  },
 });
 
 module.exports = reactionSchema;
