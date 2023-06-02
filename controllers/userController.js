@@ -55,15 +55,23 @@ module.exports = {
     }
   },
 
-  // delete user
-  async deleteUser(req, res) {
-    try {
-      const dbUserData = await User.findOneAndDelete({ _id: req.params.id });
-      res.json(dbUserData);
-    } catch (err) {
-      res.status(400).json(err);
+
+ // delete user
+async deleteUser(req, res) {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ message: "No user found with this id!" });
     }
-  },
+
+    await user.remove();
+    res.json({ message: 'User and associated thoughts removed!' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+},
+
 
   // add friend 
   async addFriend(req, res) {
