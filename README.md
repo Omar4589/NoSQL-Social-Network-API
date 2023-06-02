@@ -22,7 +22,7 @@ The Social Media API is a back-end application that allows users to interact in 
 
 ## Installation <a id="installation"></a>
 
-To use the Social Media API, you'll need to `clone the repo` and `install the necessary dependencies`. While in your terminal and at the root directory of the project, run `npm install`  to install `Express.js` and `Mongoose`. You'll also need `MongoDB` installed and running on your local machine.
+To use the Social Media API, you'll need to `clone the repo` and `install the necessary dependencies`. Use an IDE to open the project directory & run `npm install` in the terminal to install `Express.js` and `Mongoose`. You'll also need `MongoDB` installed and running on your local machine. Read the [MongoDB Installation Documentation](https://www.mongodb.com/docs/manual/installation/).
 
 ## Usage <a id="usage"></a>
 
