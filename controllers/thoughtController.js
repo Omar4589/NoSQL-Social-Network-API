@@ -1,4 +1,4 @@
-const Thought = require('../models/Thought');
+const Thought = require("../models/Thought");
 
 module.exports = {
   // get all thoughts
@@ -17,7 +17,7 @@ module.exports = {
     try {
       const dbThoughtData = await Thought.findOne({ _id: req.params.id });
       if (!dbThoughtData) {
-        res.status(404).json({ message: 'No thought found with this id!' });
+        res.status(404).json({ message: "No thought found with this id!" });
         return;
       }
       res.json(dbThoughtData);
@@ -41,12 +41,12 @@ module.exports = {
   async updateThought(req, res) {
     try {
       const dbThoughtData = await Thought.findOneAndUpdate(
-        { _id: req.params.id }, 
-        req.body, 
+        { _id: req.params.id },
+        req.body,
         { new: true, runValidators: true }
       );
       if (!dbThoughtData) {
-        res.status(404).json({ message: 'No thought found with this id!' });
+        res.status(404).json({ message: "No thought found with this id!" });
         return;
       }
       res.json(dbThoughtData);
@@ -58,7 +58,9 @@ module.exports = {
   // delete thought
   async deleteThought(req, res) {
     try {
-      const dbThoughtData = await Thought.findOneAndDelete({ _id: req.params.id });
+      const dbThoughtData = await Thought.findOneAndDelete({
+        _id: req.params.id,
+      });
       res.json(dbThoughtData);
     } catch (err) {
       res.status(400).json(err);
@@ -74,7 +76,7 @@ module.exports = {
         { new: true, runValidators: true }
       );
       if (!dbThoughtData) {
-        res.status(404).json({ message: 'No thought found with this id!' });
+        res.status(404).json({ message: "No thought found with this id!" });
         return;
       }
       res.json(dbThoughtData);
@@ -88,12 +90,12 @@ module.exports = {
     try {
       const dbThoughtData = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $pull: { reactions: { reactionId: req.params.reactionId } } },
+        { $pull: { reactions: {} } },
         { new: true }
       );
       res.json(dbThoughtData);
     } catch (err) {
       res.json(err);
     }
-  }
+  },
 };
