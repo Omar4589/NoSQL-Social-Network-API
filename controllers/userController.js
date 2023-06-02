@@ -1,4 +1,5 @@
-const User = require('../models/User');
+const User = require("../models/User");
+const Thought = require("../models/Thought");
 
 module.exports = {
   // get all users
@@ -17,7 +18,7 @@ module.exports = {
     try {
       const dbUserData = await User.findOne({ _id: req.params.id });
       if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id!' });
+        res.status(404).json({ message: "No user found with this id!" });
         return;
       }
       res.json(dbUserData);
@@ -41,12 +42,12 @@ module.exports = {
   async updateUser(req, res) {
     try {
       const dbUserData = await User.findOneAndUpdate(
-        { _id: req.params.id }, 
-        req.body, 
+        { _id: req.params.id },
+        req.body,
         { new: true, runValidators: true }
       );
       if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id!' });
+        res.status(404).json({ message: "No user found with this id!" });
         return;
       }
       res.json(dbUserData);
@@ -55,25 +56,29 @@ module.exports = {
     }
   },
 
+  // delete user
+  async deleteUser(req, res) {
+    try {
+      const user = await User.findById(req.params.id);
+     
 
- // delete user
-async deleteUser(req, res) {
-  try {
-    const user = await User.findById(req.params.id);
+      if (!user) {
+        return res.status(404).json({ message: "No user found with this id!" });
+      }
 
-    if (!user) {
-      return res.status(404).json({ message: "No user found with this id!" });
+      // delete all thoughts associated with the user
+      await Thought.deleteMany({ username: user.username });
+
+      // then delete the user
+      await User.deleteOne({ _id: req.params.id });
+
+      return res.json({ message: "User deleted successfully." });
+    } catch (err) {
+      res.status(500).json(err);
     }
+  },
 
-    await user.remove();
-    res.json({ message: 'User and associated thoughts removed!' });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-},
-
-
-  // add friend 
+  // add friend
   async addFriend(req, res) {
     try {
       const dbUserData = await User.findOneAndUpdate(
@@ -82,7 +87,7 @@ async deleteUser(req, res) {
         { new: true }
       );
       if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id!' });
+        res.status(404).json({ message: "No user found with this id!" });
         return;
       }
       res.json(dbUserData);
@@ -103,5 +108,5 @@ async deleteUser(req, res) {
     } catch (err) {
       res.json(err);
     }
-  }
+  },
 };
