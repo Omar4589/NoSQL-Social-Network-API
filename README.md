@@ -23,7 +23,7 @@ The Social Media API is a back-end application that allows users to interact in 
 ## Installation <a id="installation"></a>
 
 To use the Social Media API, you'll need `Node.js` installed on your local machine. If you don't have Node.js installed, you can download it [here](https://nodejs.org/en/download). <br><br>macOS users: [Installation via homebrew](https://nodejs.org/en/download/package-manager) is recommended. To install Node.js using homebrew, you must have [homebrew](https://brew.sh/) installed.
-<br> <br>Once you have Node.js installed, `clone the repo` and `install the necessary dependencies`. Use an IDE to open the project directory & run `npm install` in the terminal to install `Express.js` and `Mongoose`. You'll also need `MongoDB` installed and running on your local machine. Read the [MongoDB Installation Documentation](https://www.mongodb.com/docs/manual/installation/).
+<br> <br>You'll also need `MongoDB` installed and running on your local machine. Read the [MongoDB Installation Documentation](https://www.mongodb.com/docs/manual/installation/). <br><br>Once you have Node.js & MongoDB installed, `clone the repo` and `install the necessary dependencies`. Use an IDE to open the project directory & run `npm install` in the terminal to install `Express.js` and `Mongoose`. 
 
 ## Usage <a id="usage"></a>
 
