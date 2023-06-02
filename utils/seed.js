@@ -13,6 +13,14 @@ connection.once("open", async () => {
     await Thought.deleteMany({});
 
     const users = await User.insertMany(data.users);
+    for (let thought of data.thoughts) {
+      const { username } = thought;
+      const user = users.find(user => user.username === username);
+      if (user) {
+        thought.userId = user._id;
+      }
+    }
+
     const thoughts = await Thought.insertMany(data.thoughts);
 
     console.log(users, thoughts);

@@ -1,4 +1,5 @@
 const Thought = require("../models/Thought");
+const User = require("../models/User");
 
 module.exports = {
   // get all thoughts
@@ -30,8 +31,18 @@ module.exports = {
   // create thought
   async createThought(req, res) {
     try {
-      const dbThoughtData = await Thought.create(req.body);
-      res.json(dbThoughtData);
+      const thought = await Thought.create(req.body);
+      const user = await User.findOneAndUpdate(
+        { username: req.body.username },
+        { $push: { thoughts: thought._id } },
+        { runValidators: true, new: true }
+      );
+
+      if (!user) {
+        return res.status(404).json({ message: "Username not found!" });
+      }
+
+      res.json({ thought, user });
     } catch (err) {
       res.status(400).json(err);
     }
